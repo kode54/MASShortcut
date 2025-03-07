@@ -1,4 +1,8 @@
-#import <MASShortcut/MASKeyCodes.h>
+#if __has_include(<MASShortcut/MASKeyCodes.h>)
+#    import <MASShortcut/MASKeyCodes.h>
+#else
+#    import "MASKeyCodes.h"
+#endif
 
 /**
  A model class to hold a key combination.

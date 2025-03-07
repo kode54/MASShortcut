@@ -1,5 +1,13 @@
-#import <MASShortcut/MASShortcut.h>
-#import <MASShortcut/MASShortcutBinder.h>
+#if __has_include(<MASShortcut/MASShortcut.h>)
+#    import <MASShortcut/MASShortcut.h>
+#else
+#    import "MASShortcut.h"
+#endif
+#if __has_include(<MASShortcut/MASShortcutBinder.h>)
+#    import <MASShortcut/MASShortcutBinder.h>
+#else
+#    import "MASShortcutBinder.h"
+#endif
 
 @interface MASShortcutBinder ()
 @property(strong) NSMutableDictionary *actions;

@@ -1,5 +1,9 @@
 #import <AppKit/AppKit.h>
-#import <MASShortcut/MASShortcutView.h>
+#if __has_include(<MASShortcut/MASShortcutView.h>)
+#    import <MASShortcut/MASShortcutView.h>
+#else
+#    import "MASShortcutView.h"
+#endif
 
 /**
  A simplified interface to bind the recorder value to user defaults.

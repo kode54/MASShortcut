@@ -1,4 +1,8 @@
-#import <MASShortcut/MASShortcut.h>
+#if __has_include(<MASShortcut/MASShortcut.h>)
+#    import <MASShortcut/MASShortcut.h>
+#else
+#    import "MASShortcut.h"
+#endif
 
 /**
  This class is used by the recording control to tell which shortcuts are acceptable.

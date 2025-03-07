@@ -1,4 +1,8 @@
-#import <MASShortcut/MASShortcutMonitor.h>
+#if __has_include(<MASShortcut/MASShortcutMonitor.h>)
+#    import <MASShortcut/MASShortcutMonitor.h>
+#else
+#    import "MASShortcutMonitor.h"
+#endif
 
 /**
  Binds actions to user defaults keys.

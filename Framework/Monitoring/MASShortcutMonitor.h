@@ -1,4 +1,8 @@
-#import <MASShortcut/MASShortcut.h>
+#if __has_include(<MASShortcut/MASShortcut.h>)
+#    import <MASShortcut/MASShortcut.h>
+#else
+#    import "MASShortcut.h"
+#endif
 
 /**
  Executes action when a shortcut is pressed.
