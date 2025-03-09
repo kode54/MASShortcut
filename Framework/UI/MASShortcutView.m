@@ -2,6 +2,7 @@
 #import "MASShortcutValidator.h"
 #import "MASLocalization.h"
 #import "MASShortcutViewButtonCell.h"
+#import "MASDictionaryTransformer.h"
 
 NSString *const MASShortcutBinding = @"shortcutValue";
 
@@ -26,6 +27,18 @@ static const CGFloat MASButtonFontSize = 11;
     NSInteger _hintToolTipTag;
     NSTrackingArea *_hintArea;
     BOOL _acceptsFirstResponder;
+}
+
+#pragma mark -
+
++ (void)initialize
+{
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        NSValueTransformer *transformer = [MASDictionaryTransformer new];
+        [NSValueTransformer setValueTransformer:transformer
+                                        forName:MASDictionaryTransformerName];
+    });
 }
 
 #pragma mark -

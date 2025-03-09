@@ -28,13 +28,29 @@ static NSString *const MASModifierFlagsKey = @"modifierFlags";
     }
 }
 
-- (MASShortcut*) transformedValue: (NSDictionary*) dictionary
+- (MASShortcut*) transformedValue: (id) value
 {
     // We have to be defensive here as the value may come from user defaults.
-    if (![dictionary isKindOfClass:[NSDictionary class]]) {
+    if (![value isKindOfClass:[NSDictionary class]] &&
+        ![value isKindOfClass:[NSData class]]) {
         return nil;
     }
 
+    id object = nil;
+    @try {
+        if([value isKindOfClass:[NSData class]]) {
+            object = [NSKeyedUnarchiver unarchiveObjectWithData:value];
+        }
+    }
+    @catch(NSException *e) {
+        return nil;
+    }
+
+    if(object && [object isKindOfClass:[MASShortcut class]]) {
+        return object;
+    }
+
+    NSDictionary *dictionary = (NSDictionary *)value;
     id keyCodeBox = [dictionary objectForKey:MASKeyCodeKey];
     id modifierFlagsBox = [dictionary objectForKey:MASModifierFlagsKey];
 

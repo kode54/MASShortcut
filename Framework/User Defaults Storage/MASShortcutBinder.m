@@ -8,6 +8,11 @@
 #else
 #    import "MASShortcutBinder.h"
 #endif
+#if __has_include(<MASShortcut/MASDictionaryTransformer.h>)
+#    import <MASShortcut/MASDictionaryTransformer.h>
+#else
+#    import "MASDictionaryTransformer.h"
+#endif
 
 @interface MASShortcutBinder ()
 @property(strong) NSMutableDictionary *actions;
@@ -24,7 +29,7 @@
     [self setActions:[NSMutableDictionary dictionary]];
     [self setShortcuts:[NSMutableDictionary dictionary]];
     [self setShortcutMonitor:[MASShortcutMonitor sharedMonitor]];
-    [self setBindingOptions:@{NSValueTransformerNameBindingOption: NSKeyedUnarchiveFromDataTransformerName}];
+    [self setBindingOptions:@{NSValueTransformerBindingOption: [MASDictionaryTransformer new]}];
     return self;
 }
 
