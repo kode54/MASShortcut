@@ -180,11 +180,18 @@ static const CGFloat MASButtonFontSize = 11;
 
 - (void)setShortcutValue:(MASShortcut *)shortcutValue
 {
+    [self setShortcutValue:shortcutValue andPropagate:YES];
+}
+
+- (void)setShortcutValue:(MASShortcut *)shortcutValue andPropagate:(BOOL)propagate
+{
     _shortcutValue = shortcutValue;
     [self resetToolTips];
     [self invalidateIntrinsicContentSize];
     [self setNeedsDisplay:YES];
-    [self propagateValue:shortcutValue forBinding:MASShortcutBinding];
+    if(propagate) {
+        [self propagateValue:shortcutValue forBinding:MASShortcutBinding];
+    }
 
     if (self.shortcutValueChange) {
         self.shortcutValueChange(self);
@@ -550,24 +557,9 @@ void *kUserDataHint = &kUserDataHint;
 // http://tomdalling.com/blog/cocoa/implementing-your-own-cocoa-bindings/
 -(void) propagateValue:(id)value forBinding:(NSString*)binding
 {
-    NSParameterAssert(binding != nil);
-
-    //WARNING: bindingInfo contains NSNull, so it must be accounted for
-    NSDictionary* bindingInfo = [self infoForBinding:binding];
-    if(!bindingInfo)
-        return; //there is no binding
-
-    //apply the value transformer, if one has been set
-    NSDictionary* bindingOptions = [bindingInfo objectForKey:NSOptionsKey];
-    if(bindingOptions){
-        NSValueTransformer* transformer = [bindingOptions valueForKey:NSValueTransformerBindingOption];
-        if(!transformer || (id)transformer == [NSNull null]){
-            NSString* transformerName = [bindingOptions valueForKey:NSValueTransformerNameBindingOption];
-            if(transformerName && (id)transformerName != [NSNull null]){
-                transformer = [NSValueTransformer valueTransformerForName:transformerName];
-            }
-        }
-
+    if(defaultsKey && [defaultsKey length]) {
+        NSString *boundKeyPath = defaultsKey;
+        NSValueTransformer *transformer = defaultsTransformer;
         if(transformer && (id)transformer != [NSNull null]){
             if([[transformer class] allowsReverseTransformation]){
                 value = [transformer reverseTransformedValue:value];
@@ -575,21 +567,9 @@ void *kUserDataHint = &kUserDataHint;
                 NSLog(@"WARNING: binding \"%@\" has value transformer, but it doesn't allow reverse transformations in %s", binding, __PRETTY_FUNCTION__);
             }
         }
-    }
 
-    id boundObject = [bindingInfo objectForKey:NSObservedObjectKey];
-    if(!boundObject || boundObject == [NSNull null]){
-        NSLog(@"ERROR: NSObservedObjectKey was nil for binding \"%@\" in %s", binding, __PRETTY_FUNCTION__);
-        return;
+        [[[NSUserDefaultsController sharedUserDefaultsController] defaults] setValue:value forKey:boundKeyPath];
     }
-
-    NSString* boundKeyPath = [bindingInfo objectForKey:NSObservedKeyPathKey];
-    if(!boundKeyPath || (id)boundKeyPath == [NSNull null]){
-        NSLog(@"ERROR: NSObservedKeyPathKey was nil for binding \"%@\" in %s", binding, __PRETTY_FUNCTION__);
-        return;
-    }
-
-    [boundObject setValue:value forKeyPath:boundKeyPath];
 }
 
 #pragma mark - Accessibility
