@@ -391,8 +391,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2600;
-				ORGANIZATIONNAME = "Vadim Shpakovski";
+				LastUpgradeCheck = 1620;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					0D827D8219910AFF0010B8EF = {
 						TestTargetID = 0D827CD21990D4420010B8EF;
@@ -400,7 +400,7 @@
 				};
 			};
 			buildConfigurationList = 0D827CCD1990D4420010B8EF /* Build configuration list for PBXProject "MASShortcut" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -669,6 +669,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
@@ -700,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
