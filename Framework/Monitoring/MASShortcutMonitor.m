@@ -38,7 +38,7 @@ static OSStatus MASCarbonEventCallback(EventHandlerCallRef, EventRef, void*);
     static dispatch_once_t once;
     static MASShortcutMonitor *sharedInstance;
     dispatch_once(&once, ^{
-        sharedInstance = [[self alloc] init];
+        sharedInstance = [self new];
     });
     return sharedInstance;
 }

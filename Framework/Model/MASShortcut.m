@@ -173,7 +173,7 @@ static NSString *const MASShortcutModifierFlags = @"ModifierFlags";
     if (keystroke.length) {
         static NSMutableCharacterSet *validChars = nil;
         if (validChars == nil) {
-            validChars = [[NSMutableCharacterSet alloc] init];
+            validChars = [NSMutableCharacterSet new];
             [validChars formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];
             [validChars formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
             [validChars formUnionWithCharacterSet:[NSCharacterSet symbolCharacterSet]];

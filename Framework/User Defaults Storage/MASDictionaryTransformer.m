@@ -19,7 +19,7 @@ static NSString *const MASModifierFlagsKey = @"modifierFlags";
 - (NSDictionary*) reverseTransformedValue: (MASShortcut*) shortcut
 {
     if (shortcut == nil) {
-        return [NSDictionary dictionary];
+        return @{};
     } else {
         return @{
             MASKeyCodeKey: @([shortcut keyCode]),

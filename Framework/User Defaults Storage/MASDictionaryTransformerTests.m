@@ -23,9 +23,9 @@
 - (void) testNilRepresentation
 {
     MASDictionaryTransformer *transformer = [MASDictionaryTransformer new];
-    XCTAssertEqualObjects([transformer reverseTransformedValue:nil], [NSDictionary dictionary],
+    XCTAssertEqualObjects([transformer reverseTransformedValue:nil], @{},
         @"Store nil values as an empty dictionary.");
-    XCTAssertNil([transformer transformedValue:[NSDictionary dictionary]],
+    XCTAssertNil([transformer transformedValue:@{}],
         @"Load empty dictionary as nil.");
 }
 

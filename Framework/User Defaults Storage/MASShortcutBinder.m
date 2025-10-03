@@ -55,7 +55,7 @@
     static dispatch_once_t once;
     static MASShortcutBinder *sharedInstance;
     dispatch_once(&once, ^{
-        sharedInstance = [[self alloc] init];
+        sharedInstance = [self new];
     });
     return sharedInstance;
 }

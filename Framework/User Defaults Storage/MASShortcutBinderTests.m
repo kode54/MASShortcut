@@ -11,9 +11,9 @@ static NSString *const SampleDefaultsKey = @"sampleShortcut";
 - (void) setUp
 {
     [super setUp];
-    [self setBinder:[[MASShortcutBinder alloc] init]];
+    [self setBinder:[MASShortcutBinder new]];
     [self setMonitor:[_binder shortcutMonitor]];
-    [self setDefaults:[[NSUserDefaults alloc] init]];
+    [self setDefaults:[NSUserDefaults new]];
     [_defaults removeObjectForKey:SampleDefaultsKey];
 }
 

@@ -68,7 +68,7 @@ static const CGFloat MASButtonFontSize = 11;
 
 - (void)commonInit
 {
-    _shortcutCell = [[[self.class shortcutCellClass] alloc] init];
+    _shortcutCell = [[self.class shortcutCellClass] new];
     _shortcutCell.buttonType = NSButtonTypePushOnPushOff;
     _shortcutCell.font = [[NSFontManager sharedFontManager] convertFont:_shortcutCell.font toSize:MASButtonFontSize];
     _shortcutValidator = [MASShortcutValidator sharedValidator];
