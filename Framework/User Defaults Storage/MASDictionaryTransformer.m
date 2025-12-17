@@ -39,15 +39,10 @@ static NSString *const MASModifierFlagsKey = @"modifierFlags";
     id object = nil;
     if([value isKindOfClass:[NSData class]]) {
         @try {
-            @try {
-                NSError *error;
-                object = [NSKeyedUnarchiver unarchivedObjectOfClass:[MASShortcut class] fromData:value error:&error];
-                if(error) {
-                    object = nil;
-                }
-            }
-            @catch(NSException *e) {
-                object = [NSKeyedUnarchiver unarchiveObjectWithData:value];
+            NSError *error;
+            object = [NSKeyedUnarchiver unarchivedObjectOfClass:[MASShortcut class] fromData:value error:&error];
+            if(error) {
+                object = nil;
             }
         }
         @catch(NSException *e) {
