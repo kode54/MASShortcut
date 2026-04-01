@@ -1,4 +1,4 @@
-#import "MASShortcutView.h"
+#import "MASShortcutView+Bindings.h" // Include bindings for dealloc below
 #import "MASShortcutValidator.h"
 #import "MASLocalization.h"
 #import "MASShortcutViewButtonCell.h"
@@ -82,6 +82,7 @@ static const CGFloat MASButtonFontSize = 11;
 {
     [self activateEventMonitoring:NO];
     [self activateResignObserver:NO];
+	self.associatedUserDefaultsKey = nil;
 }
 
 #pragma mark - Public accessors
