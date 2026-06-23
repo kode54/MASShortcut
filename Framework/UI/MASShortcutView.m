@@ -435,7 +435,16 @@ void *kUserDataHint = &kUserDataHint;
     _hintToolTipTag = [self addToolTipRect:hintRect owner:self userData:kUserDataHint];
 }
 
-- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(CGPoint)point userData:(void *)data
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)data
+{
+    // Forward to modern API; provide a zero rect for the location parameter which is unused.
+    return [self view:view stringForToolTip:tag point:point location:NSZeroRect userData:data];
+}
+#pragma clang diagnostic pop
+
+- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point location:(NSRect)tipRect userData:(void *)data
 {
     if (data == kUserDataShortcut) {
         return MASLocalizedString(@"Click to record new shortcut", @"Tooltip for non-empty shortcut button");
